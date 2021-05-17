@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <form class="comparisonForm">
+        <section class="comparisonForm__container">
+            <h2>Calcular similitud entre personas</h2>
+            <div class="comparisonForm__section">
+                <label for="person">Persona</label>
+                <select name="person" id="">
+                    
+                </select>
+                <label for="neightbors">Vecinos</label>
+                <input type="number" name="neightbors" placeholder="Ingresa el número de vecinos" required>
+                <button class="comparisonForm__btn">
+                    Ejecutar
+                </button>
+            </div>
+            <div class="comparisonForm__section">
+                <h2>Vecinos</h2>
+                <ol class="comparisonForm__results">
+
+                </ol>
+            </div>
+        </section>
+    </form>
+    <script src="./lib/papaparse.min.js"></script>
+    <script src="./index.js"></script>
+</body>
+
+</html>
