@@ -28,7 +28,6 @@ comparisonForm.addEventListener('submit', event => {
     event.preventDefault();
     const personA = getPersonFromList(personSelect.value);
     const neightborNumber = Number.parseInt(neightborsSize.value);
-    console.log(neightborNumber);
     neightborsList = [];
     let similarityList = [];
     let sortedList = [];
@@ -46,10 +45,10 @@ comparisonForm.addEventListener('submit', event => {
             cosineSimilarity: cosineSimilarity
         })
     }
+
     sortedList = getSortNeightbors(similarityList);
     neightborsList = sortedList.splice(0, neightborNumber + 1);
     renderResult(neightborsList);
-    console.log(neightborsList)
     renderGraphic(neightborsList)
 })
 
@@ -106,7 +105,7 @@ function renderResult(list) {
     let copy = [...list].splice(1, list.length);
     copy.forEach(elem => {
         const listItem = document.createElement("li");
-        listItem.innerHTML = `${elem.Nombre}: ${elem.cosineSimilarity.toFixed(2)}`
+        listItem.innerHTML = `${elem.Nombre}: ${getCosineSimilarityToPercent(elem.cosineSimilarity)}%`
         resultSection.appendChild(listItem)
     })
 }
@@ -114,23 +113,26 @@ function renderResult(list) {
 function renderGraphic(list) {
     resultGraphicSection.innerHTML = "";
     let copy = [...list];
+    let multiplier = 2;
+
     copy.forEach((elem, i) => {
         const iconItem = document.createElement("div");
         iconItem.classList.add("comparisonForm__icon");
-        if(i === 0) {
-            iconItem.classList.add("comparisonForm__icon--first")
-        }
-        let substract = 100 - getCosineSimilarityToPercent(elem.cosineSimilarity);
-        iconItem.style.left = `${substract}%`;
-        iconItem.innerHTML = 
-        `
-        <p>${elem.Nombre}</p>
-        <p>${getCosineSimilarityToPercent(elem.cosineSimilarity)}%</p>
-        `
+        let substract = (100 - (getCosineSimilarityToPercent(elem.cosineSimilarity))) * multiplier;
+        iconItem.classList.add(`${i === 0 ? "comparisonForm__icon--first" : "comparisonForm__icon"}`)
+        iconItem.innerHTML =
+            `
+            <div class="arrow-left"></div>
+            <section>
+            <p>${elem.Nombre}${i !== 0 ? `: ${getCosineSimilarityToPercent(elem.cosineSimilarity)}%` : ""}</p>
+            </section>
+            `
+        iconItem.style.zIndex = `${copy.length - i}`
+        iconItem.style.top = `${substract}%`;
         resultGraphicSection.appendChild(iconItem);
     })
 }
 
 function getCosineSimilarityToPercent(value) {
-    return value.toFixed(2) * 100;
+    return Math.round(value * 100);
 }

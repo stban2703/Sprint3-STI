@@ -2,12 +2,21 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
 .comparisonForm {
     width: 100%;
+    height: 100%;
+    display: flex;
 }
 
 .comparisonForm__container {
     width: 100%;
+    margin-left: 10px;
 }
 
 .comparisonForm__section {
@@ -29,37 +38,56 @@
 
 .comparisonForm__graphic {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
-    height: 50px;
+    height: 100%;
     position: relative;
-    border-bottom: 1px solid blue;
+    border-left: 2px solid rgb(35, 41, 48);
+    margin-top: 50px;
+    margin-bottom: 200px;
 }
 
 .comparisonForm__icon {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    text-align: center;
     position: absolute;
-    width: 50px;
-    height: 50px;
-    background-color: aqua;
-    border-radius: 100%;
-    border: 1px solid rgb(13, 110, 110);
-    top: 50%;
-    transform: rotate(-90deg);
 }
 
-.comparisonForm__icon--first {
-    background-color: rgb(180, 85, 85);
+.comparisonForm__icon section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(13, 110, 110);
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px 3px rgba(5, 48, 48, 0.3);
+}
+
+.comparisonForm__icon--first section{
+    background-color: rgb(168, 7, 120);
+    box-shadow: 0px 2px 5px 3px rgba(168, 7, 120, 0.3);
+}
+
+.comparisonForm__icon--first .arrow-left{
+    border-right: 10px solid rgb(168, 7, 120);
 }
 
 .comparisonForm__icon p {
-    font-size: 0.8rem;
+    font-size: 1rem;
     margin: 1px 0;
+    text-align: center;
+    color: white;
 }
+
+.arrow-left {
+    width: 0; 
+    height: 0; 
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid rgb(13, 110, 110); 
+  }
 
 input:disabled {
   background-color: white;

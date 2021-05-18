@@ -12,14 +12,14 @@
 <body>
     <form class="comparisonForm">
         <section class="comparisonForm__container">
-            <h2>Calcular similitud entre personas</h2>
+            <h2>Encontrar vecinos</h2>
             <div class="comparisonForm__section">
                 <label for="person">Persona</label>
                 <select name="person" id="">
 
                 </select>
-                <label for="neightbors">Vecinos</label>
-                <input type="number" name="neightbors" placeholder="Ingresa el número de vecinos" required>
+                <label for="neightbors">Vecinos (K)</label>
+                <input type="number" name="neightbors" required min="1" max="24">
                 <button class="comparisonForm__btn">
                     Ejecutar
                 </button>
@@ -30,10 +30,9 @@
 
                 </ol>
             </div>
-            <div class="comparisonForm__graphic">
-                <div class="comparisonForm__icon">
-                </div>
-            </div>
+        </section>
+        <section class="comparisonForm__graphic">
+                
         </section>
     </form>
     <script src="./lib/papaparse.min.js"></script>
