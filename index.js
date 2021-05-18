@@ -2,6 +2,7 @@ const comparisonForm = document.querySelector(".comparisonForm");
 const personSelect = comparisonForm.person;
 const neightborsSize = comparisonForm.neightbors;
 const resultSection = document.querySelector(".comparisonForm__results");
+const resultGraphicSection = document.querySelector(".comparisonForm__graphic");
 
 let url = './data/baseDeDatos3.csv';
 let result = 0;
@@ -26,7 +27,7 @@ Papa.parse(url, {
 comparisonForm.addEventListener('submit', event => {
     event.preventDefault();
     const personA = getPersonFromList(personSelect.value);
-    const neightborNumber = neightborsSize.value;
+    const neightborNumber = Number.parseInt(neightborsSize.value);
     console.log(neightborNumber);
     neightborsList = [];
     let similarityList = [];
@@ -46,8 +47,10 @@ comparisonForm.addEventListener('submit', event => {
         })
     }
     sortedList = getSortNeightbors(similarityList);
-    neightborsList = sortedList.splice(1, neightborNumber);
-    renderResult(neightborsList)
+    neightborsList = sortedList.splice(0, neightborNumber + 1);
+    renderResult(neightborsList);
+    console.log(neightborsList)
+    renderGraphic(neightborsList)
 })
 
 function renderNameOptions() {
@@ -100,9 +103,31 @@ function getSortNeightbors(list) {
 
 function renderResult(list) {
     resultSection.innerHTML = "";
-    list.forEach(elem => {
+    let copy = [...list].splice(1, list.length);
+    copy.forEach(elem => {
         const listItem = document.createElement("li");
         listItem.innerHTML = `${elem.Nombre}: ${elem.cosineSimilarity.toFixed(2)}`
         resultSection.appendChild(listItem)
     })
+}
+
+function renderGraphic(list) {
+    resultGraphicSection.innerHTML = "";
+    let copy = [...list];
+    copy.forEach(elem => {
+        const iconItem = document.createElement("div");
+        iconItem.classList.add("comparisonForm__icon");
+        let substract = 100 - getCosineSimilarityToPercent(elem.cosineSimilarity);
+        iconItem.style.left = `${substract}%`;
+        iconItem.innerHTML = 
+        `
+        <p>${elem.Nombre}</p>
+        <p>${getCosineSimilarityToPercent(elem.cosineSimilarity)}%</p>
+        `
+        resultGraphicSection.appendChild(iconItem);
+    })
+}
+
+function getCosineSimilarityToPercent(value) {
+    return value.toFixed(2) * 100;
 }
