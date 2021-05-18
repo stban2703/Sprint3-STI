@@ -114,9 +114,12 @@ function renderResult(list) {
 function renderGraphic(list) {
     resultGraphicSection.innerHTML = "";
     let copy = [...list];
-    copy.forEach(elem => {
+    copy.forEach((elem, i) => {
         const iconItem = document.createElement("div");
         iconItem.classList.add("comparisonForm__icon");
+        if(i === 0) {
+            iconItem.classList.add("comparisonForm__icon--first")
+        }
         let substract = 100 - getCosineSimilarityToPercent(elem.cosineSimilarity);
         iconItem.style.left = `${substract}%`;
         iconItem.innerHTML = 

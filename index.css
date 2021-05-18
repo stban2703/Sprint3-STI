@@ -52,6 +52,10 @@
     transform: rotate(-90deg);
 }
 
+.comparisonForm__icon--first {
+    background-color: rgb(180, 85, 85);
+}
+
 .comparisonForm__icon p {
     font-size: 0.8rem;
     margin: 1px 0;
