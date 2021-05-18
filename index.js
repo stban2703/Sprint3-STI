@@ -1,6 +1,6 @@
 const comparisonForm = document.querySelector(".comparisonForm");
 const personSelect = comparisonForm.person;
-const neightborsSize = comparisonForm.neightbors;
+const neighborsSize = comparisonForm.neighbors;
 const resultSection = document.querySelector(".comparisonForm__results");
 const resultGraphicSection = document.querySelector(".comparisonForm__graphic");
 
@@ -8,7 +8,7 @@ let url = './data/baseDeDatos3.csv';
 let result = 0;
 let data = [];
 let nameList = [];
-let neightborsList = [];
+let neighborsList = [];
 
 Papa.parse(url, {
     header: true,
@@ -27,8 +27,8 @@ Papa.parse(url, {
 comparisonForm.addEventListener('submit', event => {
     event.preventDefault();
     const personA = getPersonFromList(personSelect.value);
-    const neightborNumber = Number.parseInt(neightborsSize.value);
-    neightborsList = [];
+    const neighborNumber = Number.parseInt(neighborsSize.value);
+    neighborsList = [];
     let similarityList = [];
     let sortedList = [];
 
@@ -46,10 +46,10 @@ comparisonForm.addEventListener('submit', event => {
         })
     }
 
-    sortedList = getSortNeightbors(similarityList);
-    neightborsList = sortedList.splice(0, neightborNumber + 1);
-    renderResult(neightborsList);
-    renderGraphic(neightborsList)
+    sortedList = getSortneighbors(similarityList);
+    neighborsList = sortedList.splice(0, neighborNumber + 1);
+    renderResult(neighborsList);
+    renderGraphic(neighborsList)
 })
 
 function renderNameOptions() {
@@ -93,7 +93,7 @@ function getCosineSimilarity(dotProduct, magnitudeA, magnitudeB) {
     return cosineSimilarity;
 }
 
-function getSortNeightbors(list) {
+function getSortneighbors(list) {
     let copy = list.sort((a, b) => {
         return b.cosineSimilarity - a.cosineSimilarity;
     })
