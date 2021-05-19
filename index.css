@@ -22,6 +22,7 @@ html, body {
     width: 100%;
     height: 100%;
     max-width: 600px;
+    margin-left: 15px;
 }
 
 .comparisonForm__graphicSection {
@@ -69,19 +70,27 @@ html, body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: rgb(13, 110, 110);
+    background-color: rgb(26, 156, 156);
     padding: 10px 15px;
     border-radius: 10px;
     box-shadow: 0px 2px 5px 3px rgba(5, 48, 48, 0.3);
 }
 
+.arrow-left {
+    width: 0; 
+    height: 0; 
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid rgb(26, 156, 156); 
+}
+
 .comparisonForm__icon--first section{
-    background-color: rgb(168, 7, 120);
-    box-shadow: 0px 2px 5px 3px rgba(168, 7, 120, 0.3);
+    background-color: rgb(192, 19, 140);
+    box-shadow: 0px 2px 5px 3px rgba(175, 9, 125, 0.3);
 }
 
 .comparisonForm__icon--first .arrow-left{
-    border-right: 10px solid rgb(168, 7, 120);
+    border-right: 10px solid rgb(192, 19, 140);
 }
 
 .comparisonForm__icon p {
@@ -91,13 +100,22 @@ html, body {
     color: white;
 }
 
-.arrow-left {
-    width: 0; 
-    height: 0; 
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-right: 10px solid rgb(13, 110, 110); 
-  }
+.comparisonForm__icon--focus section {
+    padding: 15px 20px;
+    background-color: rgb(153, 8, 189);
+}
+
+.comparisonForm__icon--focus .arrow-left {
+    border-right: 10px solid rgb(153, 8, 189);
+}
+
+.comparisonForm__li {
+    margin: 10px 0;
+}
+
+.comparisonForm__li:hover {
+    cursor: pointer;
+}
 
 input:disabled {
   background-color: white;

@@ -49,7 +49,8 @@ comparisonForm.addEventListener('submit', event => {
     sortedList = getSortneighbors(similarityList);
     neighborsList = sortedList.splice(0, neighborNumber + 1);
     renderResult(neighborsList);
-    renderGraphic(neighborsList)
+    renderGraphic(neighborsList);
+    handleItemHover();
 })
 
 function renderNameOptions() {
@@ -105,6 +106,7 @@ function renderResult(list) {
     let copy = [...list].splice(1, list.length);
     copy.forEach(elem => {
         const listItem = document.createElement("li");
+        listItem.classList.add("comparisonForm__li");
         listItem.innerHTML = `${elem.Nombre}: ${getCosineSimilarityToPercent(elem.cosineSimilarity)}%`
         resultSection.appendChild(listItem)
     })
@@ -113,7 +115,7 @@ function renderResult(list) {
 function renderGraphic(list) {
     resultGraphicSection.innerHTML = "";
     let copy = [...list];
-    let multiplier = 2;
+    let multiplier = 1.75;
 
     copy.forEach((elem, i) => {
         const iconItem = document.createElement("div");
@@ -135,4 +137,23 @@ function renderGraphic(list) {
 
 function getCosineSimilarityToPercent(value) {
     return Math.round(value * 100);
+}
+
+function handleItemHover() {
+    const listHandlers = resultSection.querySelectorAll(".comparisonForm__li");
+    const listTargets = resultGraphicSection.querySelectorAll(".comparisonForm__icon");
+
+    listHandlers.forEach((elem, i) => {
+        let prevZIndex = listTargets.length - (i + 1);
+
+        elem.addEventListener("mouseover", () => {
+            listTargets[i + 1].style.zIndex = 99;
+            listTargets[i + 1].classList.add("comparisonForm__icon--focus");
+        })
+
+        elem.addEventListener("mouseout", () => {
+            listTargets[i + 1].style.zIndex = prevZIndex;
+            listTargets[i + 1].classList.remove("comparisonForm__icon--focus");
+        })
+    })
 }
